@@ -12,6 +12,7 @@ async function run() {
     const assetPath = core.getInput('asset_path', { required: true });
     const assetName = core.getInput('asset_name', { required: true });
     const assetContentType = core.getInput('asset_content_type', { required: true });
+    const assetLabel = core.getInput('asset_label', { required: false });
 
     // Determine content-length for header to upload asset
     const contentLength = filePath => fs.statSync(filePath).size;
@@ -26,6 +27,7 @@ async function run() {
       url: uploadUrl,
       headers,
       name: assetName,
+      label: assetLabel,
       file: fs.readFileSync(assetPath)
     });
 
